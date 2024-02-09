@@ -1,4 +1,4 @@
-import { login, signup } from "@/toolkit/features/auth/authSlice";
+import { signup } from "@/toolkit/features/auth/authSlice";
 import { AppDispatch, RootState } from "@/toolkit/store/store";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
@@ -12,7 +12,7 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
-  const {user,loading,error} =useSelector((state: RootState) => state.auth);
+  const {user} =useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
    // redirect authenticated user to profile screen
@@ -22,12 +22,6 @@ const Signup = () => {
     }
   }, [navigate, user])
   
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCredentials({
-      ...credentials,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();

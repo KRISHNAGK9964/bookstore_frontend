@@ -1,4 +1,4 @@
-import { GoogleBook, Review } from "@/types/common";
+import { Review } from "@/types/common";
 // import {
 //   DropdownMenu,
 //   DropdownMenuTrigger,

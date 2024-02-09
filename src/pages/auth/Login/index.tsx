@@ -13,7 +13,7 @@ const Login: React.FC<LoginProps> = () => {
     username: "",
     password: "",
   });
-  const {user,loading,error} =useSelector((state: RootState) => state.auth);
+  const {user,loading} =useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
    // redirect authenticated user to profile screen

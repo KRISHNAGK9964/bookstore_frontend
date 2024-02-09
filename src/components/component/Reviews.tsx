@@ -10,18 +10,6 @@ import React, { useEffect, useState } from "react";
 import { DropdownMenuShortcut } from "../ui/dropdown-menu";
 import axios from "axios";
 import { config } from "../../../Constants";
-import { Button } from "../ui/button";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from "../ui/dialog";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 import { useSelector } from "react-redux";
 import { RootState } from "@/toolkit/store/store";
 import { useNavigate } from "react-router-dom";
@@ -33,7 +21,6 @@ interface ReviewsProps {
 const Reviews: React.FC<ReviewsProps> = ({ book }) => {
     const [reviews, setReviews] = useState<Review[]>([]);
     const [userReview, setUserReview] = useState({ rating: 4.3, text: "" });
-    const [loginDailogOpen, setLoginDailogOpen] = useState(false);
     const {user , accessToken} = useSelector((state:RootState) => state.auth);
     const navigate = useNavigate();
   const fetchReviews = async () => {
