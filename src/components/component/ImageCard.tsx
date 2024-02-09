@@ -29,7 +29,7 @@ export function pickRandomItem<T>(array: T[]): T | undefined {
     const randomIndex = Math.floor(Math.random() * array.length);
     return array[randomIndex];
   }
-const ImageCard: React.FC<ImageCardProps> = ({ imageUrl, title,author,ratingCount }) => {
+const ImageCard: React.FC<ImageCardProps> = ({ imageUrl, title }) => {
     const bgcolor = pickRandomItem(mattColors);
   return (
     <div style={{background:bgcolor}} className={`m-4 hover:scale-105 flex-shrink-0 h-72 relative overflow-hidden rounded-2xl max-w-xs shadow-lg`}>
