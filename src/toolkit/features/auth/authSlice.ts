@@ -83,6 +83,7 @@ export const authSlice = createSlice({
         state.success = true;
         state.user = action.payload.user;
         state.accessToken = action.payload.accessToken;
+        Cookies.set("access_token",action.payload.accessToken);
       })
       .addCase(signup.rejected, (state, action) => {
         state.loading = false;
@@ -101,6 +102,7 @@ export const authSlice = createSlice({
         state.success = true;
         state.user = action.payload.user;
         state.accessToken = action.payload.accessToken;
+        Cookies.set("access_token",action.payload.accessToken);
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
