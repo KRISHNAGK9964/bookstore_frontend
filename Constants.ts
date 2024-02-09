@@ -1,5 +1,5 @@
 const production = {
-  url: "",
+  url: "https://bookstore-service-krishangk9964.onrender.com",
 };
 const development = {
   url: "http://localhost:5000",
