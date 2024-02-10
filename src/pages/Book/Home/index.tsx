@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Header from "@/components/component/Navbar";
 import ImageGrid from "@/components/component/ImageGrid";
 import SearchBar from "@/components/component/SearchBar";
+import Cookies from "js-cookie";
 
 export type book = {
   id: string;
@@ -16,8 +17,11 @@ export type book = {
 
 const Home: React.FC = () => {
   const [books, setBooks] = useState<book[]>([]);
+  const accessToken = Cookies.get("access_token");
   const fetchBooks = async () => {
-    const res = await fetch(`${config.url}/api/books?limit=16`);
+    const res = await fetch(`${config.url}/api/books?limit=16`,{
+      headers : {Authorization: `Bearer ${accessToken}`}
+    });
     const data = await res.json();
     console.log(data);
     const items = data.books.items.map((item: any) => {

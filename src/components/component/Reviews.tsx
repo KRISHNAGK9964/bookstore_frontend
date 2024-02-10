@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/toolkit/store/store";
 import { useNavigate } from "react-router-dom";
 import Comments from "./Comments";
+import Cookies from "js-cookie";
 interface ReviewsProps {
     book: GoogleBook;
 }
@@ -21,11 +22,12 @@ interface ReviewsProps {
 const Reviews: React.FC<ReviewsProps> = ({ book }) => {
     const [reviews, setReviews] = useState<Review[]>([]);
     const [userReview, setUserReview] = useState({ rating: 4.3, text: "" });
-    const {user , accessToken} = useSelector((state:RootState) => state.auth);
+    const {user } = useSelector((state:RootState) => state.auth);
     const navigate = useNavigate();
+    const accessToken = Cookies.get("access_token");
   const fetchReviews = async () => {
     try {
-      const response = await axios.get(`${config.url}/api/reviews/${book.id}`,{headers:{ 'Content-Type' : 'application/json'},withCredentials:true}); // Replace with your backend URL
+      const response = await axios.get(`${config.url}/api/reviews/${book.id}`,{headers:{ 'Content-Type' : 'application/json', "Authorization" : `Bearer ${accessToken}`},withCredentials:true}); // Replace with your backend URL
       console.log(response.data);
       setReviews(response.data.reviews);
     } catch (error: any) {
@@ -46,7 +48,7 @@ const Reviews: React.FC<ReviewsProps> = ({ book }) => {
       await axios.post(
         `${config.url}/api/reviews/${book.id}`, // Replace with your backend URL
         {...userReview,userId:user._id,username:user.username},
-        {headers:{ 'Content-Type' : 'application/json'},withCredentials:true}
+        {headers:{ 'Content-Type' : 'application/json','Authorization' : `Bearer ${accessToken}`},withCredentials:true}
       );
 
       // After submitting a review, fetch updated reviews

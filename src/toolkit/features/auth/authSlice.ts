@@ -32,6 +32,7 @@ export const signup = createAsyncThunk("auth/signup", async (user: { username: s
     // const response = await authService.signup(user as any);
     const res = await axios.post(`${API_URL}/signup`, user,{headers:{ 'Content-Type' : 'application/json'},withCredentials:true});
     console.log(res);
+    Cookies.set("access_token" , res.data.accessToken );
     return res.data;
   } catch (error: any) {
     if (error.response && error.response.data.message) {
@@ -47,6 +48,7 @@ export const login = createAsyncThunk("/login", async (credentials: { username: 
     // const response = await authService.login(user as any);
     const res = await axios.post(`${API_URL}/login`, credentials,{headers:{ 'Content-Type' : 'application/json'},withCredentials:true});
     console.log(res);
+    Cookies.set("access_token",res.data.accessToken);
     return res.data;
   } catch (error: any) {
     if (error.response && error.response.data.message) {
@@ -102,7 +104,6 @@ export const authSlice = createSlice({
         state.success = true;
         state.user = action.payload.user;
         state.accessToken = action.payload.accessToken;
-        Cookies.set("access_token",action.payload.accessToken);
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
